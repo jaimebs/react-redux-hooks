@@ -1,9 +1,11 @@
+import { actionTypes } from '../constants/counter';
+
 const actions = {
   increment: () => ({
-    type: 'COUNTER_INCREMENT'
+    type: actionTypes.COUNTER_INCREMENT
   }),
   decrement: () => ({
-    type: 'COUNTER_DECREMENT'
+    type: actionTypes.COUNTER_DECREMENT
   })
 };
 

@@ -1,31 +1,28 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { actions } from '../actions/counter';
+import { selectors } from '../selectors/counter';
 
-const Counter = ({ counter, decrement, increment }) => (
-  <>
-    <h1>Counter: {counter}</h1>
-    <ul>
-      <li>
-        <button onClick={increment}>Increment</button>
-      </li>
-      <li>
-        <button onClick={decrement}>Decrement</button>
-      </li>
-    </ul>
-  </>
-);
+const Counter = () => {
+  const counter = useSelector(selectors.getCounter);
+  const dispatch = useDispatch();
 
-const mapStateToProps = state => ({
-  counter: state.counterReducers.counter
-});
+  const handleIncrement = () => dispatch(actions.increment());
+  const handleDecrement = () => dispatch(actions.decrement());
 
-const mapDispatchToProps = dispatch => ({
-  increment: () => dispatch(actions.increment()),
-  decrement: () => dispatch(actions.decrement())
-});
+  return (
+    <>
+      <h1>Counter: {counter}</h1>
+      <ul>
+        <li>
+          <button onClick={handleIncrement}>Increment</button>
+        </li>
+        <li>
+          <button onClick={handleDecrement}>Decrement</button>
+        </li>
+      </ul>
+    </>
+  );
+};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Counter);
+export default Counter;
